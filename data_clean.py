@@ -1,3 +1,4 @@
+
 import numpy as np # linear algebra
 import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
 import ast  # for safely evaluating string representation of lists
@@ -28,7 +29,7 @@ df = df[df['colors'].apply(len) == 1]
 print(f"Rows after keeping only single-colored cards: {len(df)}")
 
 # Save the cleaned dataset
-output_file = 'all_mtg_cards_cleaned_v2.csv'
+output_file = 'all_mtg_cards_cleaned_v1.csv'
 df.to_csv(output_file, index=False)
 
 # Print final statistics
