@@ -121,9 +121,6 @@ def main():
     filtered_df = df[keep_rows]
     
     # Print summary of excluded cards
-    print("\nExcluded Cards:")
-    for card in excluded_cards:
-        print(f"- {card}")
     print(f"\nTotal cards excluded: {len(excluded_cards)}")
     
     # Save results
