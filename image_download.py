@@ -53,7 +53,7 @@ def download_image(image_url, card_name, folder_name="card_image"):
             pass
 
 # Read the cleaned dataset
-df = pd.read_csv('all_mtg_cards_cleaned_image.csv', low_memory=False)
+df = pd.read_csv('all_mtg_cards_feature_abilities.csv', low_memory=False)
 print(f"Total cards in dataset: {len(df)}")
 
 # Take a random sample
