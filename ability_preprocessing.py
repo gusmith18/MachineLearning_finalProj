@@ -479,7 +479,7 @@ df["scientist"] = df.subtypes.str.contains("Scientist")
 df["samurai"] = df.subtypes.str.contains("Samurai")
 df["squirrel"] = df.subtypes.str.contains("Squirrel")
 df["lesson"] = df.subtypes.str.contains("Lesson")
-df["mystic"] = df.type.str.contains("Mystic")
+df["mystic"] = df.subtypes.str.contains("Mystic")
 
 
 
