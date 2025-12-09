@@ -1,6 +1,5 @@
 import os
 import glob
-import argparse
 import csv
 import pandas as pd
 import cv2
@@ -173,11 +172,9 @@ def append_color_to_csv(csv_file, image_dir='card_image', name_column='name', ou
 
 
 
-if __name__ == '__main__':
-    
-    append_color_to_csv(
+
+append_color_to_csv(
         'all_mtg_cards_feature_abilities.csv',
         'card_image',
         'name',
-        'all_mtg_cards_feature_abilities_with_colors.csv'
-    )
+        'all_mtg_cards_feature_abilities_with_colors.csv')

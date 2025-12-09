@@ -31,7 +31,8 @@ print(f"Rows after keeping only single-colored cards: {len(df)}")
 
 DEFAULT_DROP = [
 	'variations', 'rulings', 'watermark', 'printings', 'foreign_names',
-	'original_text', 'original_type', 'legalities', 'set_name', 'set', 'loyalty'
+	'original_text', 'original_type', 'legalities', 'set_name', 'set', 'loyalty', 
+    'number', 'id', 'layout'
 ]
 
 cols_to_drop = []
