@@ -128,7 +128,7 @@ def process_directory(directory='card_image', output_csv=None):
 def _build_arg_parser():
     p = argparse.ArgumentParser(description='Run color detection on card images')
     p.add_argument('--dir', default='card_image', help='Directory containing card images')
-    p.add_argument('--out', default=None, help='Optional output CSV file')
+    p.add_argument('--out', default='card_color.csv', help='Optional output CSV file')
     return p
 
 
