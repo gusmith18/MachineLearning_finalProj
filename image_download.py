@@ -3,10 +3,12 @@ import os
 import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
 import hashlib
 import warnings
+import urllib3
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
 # Suppress only the InsecureRequestWarning from urllib3
 warnings.filterwarnings('ignore', category=InsecureRequestWarning)
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 
 def download_image(image_url, card_name, folder_name="card_image"):
@@ -53,11 +55,11 @@ def download_image(image_url, card_name, folder_name="card_image"):
             pass
 
 # Read the cleaned dataset
-df = pd.read_csv('all_mtg_cards_cleaned_image.csv', low_memory=False)
+df = pd.read_csv('all_mtg_cards_feature_abilities.csv', low_memory=False)
 print(f"Total cards in dataset: {len(df)}")
 
 # Take a random sample
-random_sample = df.sample(n=100, random_state=42)  # Starting with a smaller sample for testing
+random_sample = df.sample(n=1000, random_state=42)  # Starting with a smaller sample for testing
 print(f"Downloading {len(random_sample)} random card images...")
 
 # Track success/failure counts
@@ -72,10 +74,7 @@ for idx, row in random_sample.iterrows():
         failure_count += 1
 
     # Print progress every 100 downloads
-        import urllib3
-        # Suppress SSL verification warnings
-        urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-        print(f"Progress: {success_count + failure_count}/{len(random_sample)} images processed")
+    print(f"Progress: {success_count + failure_count}/{len(random_sample)} images processed")
 
 print(f"Successfully downloaded: {success_count} images")
 print(f"Failed downloads: {failure_count} images")
