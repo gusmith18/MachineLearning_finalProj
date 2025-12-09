@@ -3,7 +3,7 @@ import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
 import ast  # for safely evaluating string representation of lists
 
 # Read the dataset
-df = pd.read_csv('all_mtg_cards_cleaned_image.csv', low_memory=False)
+df = pd.read_csv('second_clean_card_backs.csv', low_memory=False)
 
 df = df.drop_duplicates(subset="name", keep="first")
 
@@ -494,7 +494,7 @@ df["is_black"] = (df.color_identity.str.contains('B'))
 df["is_red"] = (df.color_identity.str.contains('R'))
 df["is_green"] = (df.color_identity.str.contains('G'))
 
-output_file = 'all_mtg_cards_feature_abilities.csv'
+output_file = 'first_features.csv'
 df.to_csv(output_file, index=False)
 
 

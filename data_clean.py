@@ -60,7 +60,7 @@ df_clean = df.drop(columns=drops)
 
 
 # Save the cleaned dataset
-output_file = 'all_mtg_cards_cleaned_v1.csv'
+output_file = 'first_clean.csv'
 df_clean.to_csv(output_file, index=False)
 
 # Print final statistics

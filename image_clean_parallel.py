@@ -53,7 +53,7 @@ def chunk_list(lst, chunk_size):
 def main():
     # Load the dataset
     print("Loading dataset...")
-    df = pd.read_csv('all_mtg_cards_cleaned_v1.csv')
+    df = pd.read_csv('first_clean.csv')
     print(f"Loaded {len(df)} rows")
     
     # Load bad example image
@@ -124,7 +124,7 @@ def main():
     print(f"\nTotal cards excluded: {len(excluded_cards)}")
     
     # Save results
-    output_file = 'all_mtg_cards_cleaned_image.csv'
+    output_file = 'second_clean_card_backs.csv'
     filtered_df.to_csv(output_file, index=False)
     print(f"\nSaved {len(filtered_df)} rows to {output_file}")
 
