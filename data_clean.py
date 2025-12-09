@@ -32,7 +32,7 @@ print(f"Rows after keeping only single-colored cards: {len(df)}")
 DEFAULT_DROP = [
 	'variations', 'rulings', 'watermark', 'printings', 'foreign_names',
 	'original_text', 'original_type', 'legalities', 'set_name', 'set', 'loyalty', 
-    'number', 'id', 'layout'
+    'number', 'id', 'layout', 'number'
 ]
 
 cols_to_drop = []
@@ -60,7 +60,7 @@ df_clean = df.drop(columns=drops)
 
 
 # Save the cleaned dataset
-output_file = 'all_mtg_cards_cleaned_v1.csv'
+output_file = 'first_clean.csv'
 df_clean.to_csv(output_file, index=False)
 
 # Print final statistics

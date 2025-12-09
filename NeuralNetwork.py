@@ -20,7 +20,7 @@ df = df.set_index('multiverse_id')
 
 unneeded_columns = ['name', 'layout', 'type', 'subtypes', 'supertypes', 'colors',
                     'color_identity', 'rarity', 'text', 'flavor', 'id', 'image_url', 
-                    'mana_cost', 'artist', 'number']
+                    'mana_cost', 'artist']
 
 features = df.drop(columns=unneeded_columns)
 
