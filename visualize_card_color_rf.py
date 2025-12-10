@@ -208,7 +208,13 @@ def plot_accuracy_comparison(y_train, y_pred_train, y_test, y_pred_test):
     bars = ax1.bar(labels, accs, color=colors, alpha=0.7, edgecolor='black', linewidth=2)
     ax1.set_ylabel('Accuracy', fontsize=12, fontweight='bold')
     ax1.set_title('Model Accuracy', fontsize=14, fontweight='bold')
-    ax1.set_ylim([0.99, 1.0])
+    # Dynamic y-limits so lower-accuracy models still display bars
+    ymin = max(0.0, min(train_acc, test_acc) - 0.05)
+    ymax = min(1.0, max(train_acc, test_acc) + 0.05)
+    if ymin == ymax:
+        ymin = max(0.0, train_acc - 0.05)
+        ymax = min(1.0, train_acc + 0.05)
+    ax1.set_ylim([ymin, ymax])
     ax1.axhline(y=1.0, color='red', linestyle='--', linewidth=2, alpha=0.5)
     
     # Add value labels
@@ -315,7 +321,13 @@ def plot_summary_dashboard(y_train, y_pred_train, y_test, y_pred_test, y, clf_cl
     test_acc = accuracy_score(y_test, y_pred_test)
     ax1 = fig.add_subplot(gs[0, 0])
     ax1.bar(['Train', 'Test'], [train_acc, test_acc], color=['#2ecc71', '#3498db'], alpha=0.7, edgecolor='black')
-    ax1.set_ylim([0.99, 1.0])
+    # Dynamic y-limits so bars are visible
+    ymin = max(0.0, min(train_acc, test_acc) - 0.05)
+    ymax = min(1.0, max(train_acc, test_acc) + 0.05)
+    if ymin == ymax:
+        ymin = max(0.0, train_acc - 0.05)
+        ymax = min(1.0, train_acc + 0.05)
+    ax1.set_ylim([ymin, ymax])
     ax1.set_ylabel('Accuracy')
     ax1.set_title('Accuracy')
     for i, (label, acc) in enumerate(zip(['Train', 'Test'], [train_acc, test_acc])):
@@ -346,12 +358,15 @@ def plot_summary_dashboard(y_train, y_pred_train, y_test, y_pred_test, y, clf_cl
     ax4.set_xlabel('Predicted')
     ax4.set_ylabel('Actual')
     
-    # 5. Top features
+    # 5. Model configuration
     ax5 = fig.add_subplot(gs[1, 2])
-    # This will be added after loading model
-    ax5.text(0.5, 0.5, 'Feature importance\n(see separate plot)', 
-             ha='center', va='center', transform=ax5.transAxes)
-    ax5.set_title('Top Features')
+    ax5.text(0.5, 0.75, 'Multi-Output Model', 
+             ha='center', va='center', transform=ax5.transAxes, fontsize=12, fontweight='bold', color='#2c3e50')
+    ax5.text(0.5, 0.55, 'Target: 5 binary color indicators\nFeatures: 400 (all except colors)', 
+             ha='center', va='center', transform=ax5.transAxes, fontsize=10, color='#34495e')
+    ax5.text(0.5, 0.25, 'Y-Axis Fix: Dynamic limits\napplied for visibility', 
+             ha='center', va='center', transform=ax5.transAxes, fontsize=9, style='italic', color='#7f8c8d')
+    ax5.set_title('Model Configuration')
     ax5.axis('off')
     
     # 6. Per-class metrics
@@ -374,7 +389,15 @@ def plot_summary_dashboard(y_train, y_pred_train, y_test, y_pred_test, y, clf_cl
     ax6.set_xticks(x)
     ax6.set_xticklabels(clf_classes)
     ax6.legend()
-    ax6.set_ylim([0.99, 1.01])
+    # Dynamic y-limits for per-color metrics
+    metric_min = min(min(precisions), min(recalls), min(f1s))
+    metric_max = max(max(precisions), max(recalls), max(f1s))
+    ymin_m = max(0.0, metric_min - 0.05)
+    ymax_m = min(1.0, metric_max + 0.05)
+    if ymin_m == ymax_m:
+        ymin_m = max(0.0, metric_min - 0.05)
+        ymax_m = min(1.0, metric_min + 0.05)
+    ax6.set_ylim([ymin_m, ymax_m])
     ax6.grid(alpha=0.3, axis='y')
     
     plt.savefig(f'{OUTPUT_DIR}/00_summary_dashboard.png', dpi=300, bbox_inches='tight')
