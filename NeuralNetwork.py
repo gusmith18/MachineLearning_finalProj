@@ -6,12 +6,13 @@ import csv
 
 
 from sklearn.linear_model import LogisticRegression
+from sklearn.neural_network import MLPClassifier
 from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
+from sklearn import metrics
 
 
-df = pd.read_csv('all_mtg_cards_feature_abilities_with_colors.csv', low_memory=False)
+df = pd.read_csv('second_features.csv', low_memory=False)
 
 # Remove rows with missing color percentage data
 df = df.dropna(subset=['red_pct', 'green_pct', 'blue_pct', 'yellow_pct', 'black_pct', 'white_pct'])
@@ -33,3 +34,11 @@ features.drop(y_columns, axis=1, inplace=True)
 X_train, X_test, y_train, y_test = train_test_split(features, y, test_size=0.2, random_state=42)
 
 print(X_train.columns.to_series().groupby(X_train.dtypes).groups)
+
+mlp = MLPClassifier(hidden_layer_sizes=(100, 50), max_iter=500, random_state=42)
+mlp.fit(X_train, y_train)
+
+y_pred = mlp.predict(X_test)
+
+accuracy = metrics.accuracy_score(y_test, y_pred)
+print(f"Accuracy: {accuracy * 100:.2f}%")
