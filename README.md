@@ -9,3 +9,6 @@ then run image_clean_parallel.py to remove images of card backs from the data se
 
 Then run ability_preprocessing.py to add features
 
+Finally run add_color_data.py to add pixel percentages and normalized pixel percentages to the data
+
+After data cleaning is done, you can run either 
